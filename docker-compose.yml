@@ -1,0 +1,25 @@
+version: "2"
+services:
+  zipapi:
+    image: ramb0/api-pcode 
+    container_name: "pcodeapi"
+    hostname: "pcodeapi"
+    networks:
+      - flask
+    ports:
+      - 5000:5000
+    entrypoint: [ "/bin/bash", "-c", "(source /opt/yottadb/current/ydb_env_set && flask run --host=0.0.0.0 &) && sleep 30" ]
+
+
+  newman:
+    image: docker.io/ramb0/newman-ssh
+    container_name: "newman"
+    networks:
+      - flask
+    volumes:
+      - "$PWD/newman:/home/newman"
+    entrypoint: [ "/bin/bash", "-c", "sleep 10 && cd /home/newman && newman run pcodecheck.postman_collection.json" ]
+    
+
+networks:
+    flask:
