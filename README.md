@@ -1,5 +1,7 @@
 # PCODE-API
 
+![example workflow](https://github.com/RamSailopal/PCODE-API/actions/workflows/deploy.yml/badge.svg)
+
 An API that takes a UK post code and returns the longitute and latitude
 
 Utilises YottaDB as the database and Python flask to present the API endpoint.
